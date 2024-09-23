@@ -25,15 +25,20 @@ nonUniqueElements([10, 9, 10, 10, 9, 8]) == [10, 9, 10, 10, 9]
  */
 
 export default function nonUniqueElements(data) {
-  // your solution goes here
-  let countMap = new Map();
+  let counter = new Map();
+  let result = [];
 
-  // Count occurrences of each element
-  for(let i = 0; i < data.length; i++){
-    let count = (countMap.get(data[i]) || 0) + 1;
-    countMap.set(data[i], count);
+  for (let i = 0; i < data.length; i++) {
+    let element = data[i];
+    let count = counter.get(element) || 0;
+    counter.set(element, count + 1);
   }
 
-  // Collect elements that appear more than once
-  return data.filter(el => countMap.get(el) > 1);
+  for (let i = 0; i < data.length; i++) {
+    if (counter.get(data[i]) > 1) {
+      result.push(data[i]);
+    }
+  }
+
+  return result;
 }
